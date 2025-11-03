@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Products | AutoTrack Market</title>
+ <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <h2>Seller Dashboard</h2>
+    <a href="./seller_dashboard.html">Dashboard</a>
+    <a href="product.html" class="active">Products</a>
+    <a href="./orders.html">Orders</a>
+    <a href="./seller_messages.html">Messages</a>
+    <a href="./settings.html">Settings</a>
+    <li><a href="./seller_report.html">Report</a></li>
+    <a href="./seller_profile.html">Profile</a>
+    <a href="#">Logout</a>
+  </div>
+
+  <!-- Main -->
+  <div class="main-content">
+    <div class="topbar">
+      <span class="menu-btn" id="menu-btn">&#9776;</span>
+      <input type="text" placeholder="Search products...">
+      <div class="profile">👤 Seller</div>
+    </div>
+
+    <div class="products-header">
+      <h2>My Products</h2>
+      <button class="add-btn" id="addProductBtn">+ Add Product</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="productTable">
+        <tr>
+          <td>Car Battery 12V</td>
+          <td>Auto Parts</td>
+          <td>$75</td>
+          <td>23</td>
+          <td>Active</td>
+          <td class="actions">
+            <button class="edit">✏️</button>
+            <button class="delete">🗑️</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Bluetooth Speaker</td>
+          <td>Electronics</td>
+          <td>$30</td>
+          <td>50</td>
+          <td>Active</td>
+          <td class="actions">
+            <button class="edit">✏️</button>
+            <button class="delete">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="productModal">
+    <div class="modal-content">
+      <h3>Add New Product</h3>
+      <input type="text" id="pName" placeholder="Product Name">
+      <select id="pCategory">
+        <option value="">Select Category</option>
+        <option value="Auto Parts">Auto Parts</option>
+        <option value="Electronics">Electronics</option>
+      </select>
+      <input type="number" id="pPrice" placeholder="Price">
+      <input type="number" id="pStock" placeholder="Stock">
+      <button id="saveBtn">Save Product</button>
+      <button class="close-btn" id="closeModal">Cancel</button>
+    </div>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const sidebar = document.getElementById('sidebar');
+    const modal = document.getElementById('productModal');
+    const addBtn = document.getElementById('addProductBtn');
+    const closeBtn = document.getElementById('closeModal');
+    const saveBtn = document.getElementById('saveBtn');
+    const table = document.getElementById('productTable');
+
+    // Sidebar toggle
+    menuBtn.addEventListener('click', () => sidebar.classList.toggle('active'));
+
+    // Open modal
+    addBtn.addEventListener('click', () => modal.style.display = 'flex');
+
+    // Close modal
+    closeBtn.addEventListener('click', () => modal.style.display = 'none');
+
+    // Add product dynamically
+    saveBtn.addEventListener('click', () => {
+      const name = document.getElementById('pName').value;
+      const category = document.getElementById('pCategory').value;
+      const price = document.getElementById('pPrice').value;
+      const stock = document.getElementById('pStock').value;
+
+      if (!name || !category || !price || !stock) {
+        alert("Please fill all fields!");
+        return;
+      }
+
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td>${name}</td>
+        <td>${category}</td>
+        <td>$${price}</td>
+        <td>${stock}</td>
+        <td>Active</td>
+        <td class="actions">
+          <button class="edit">✏️</button>
+          <button class="delete">🗑️</button>
+        </td>
+      `;
+      table.appendChild(newRow);
+      modal.style.display = 'none';
+      document.getElementById('pName').value = '';
+      document.getElementById('pCategory').value = '';
+      document.getElementById('pPrice').value = '';
+      document.getElementById('pStock').value = '';
+    });
+
+    // Delete product
+    table.addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete')) {
+        e.target.closest('tr').remove();
+      }
+    });
+  </script>
+</body>
+</html>

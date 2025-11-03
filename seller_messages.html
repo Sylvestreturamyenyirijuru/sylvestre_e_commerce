@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seller Dashboard - Messages</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Seller Dashboard</h2>
+    <ul>
+      <li><a href="./seller_dashboard.html">Dashboard</a></li>
+      <li><a href="./product.html">Products</a></li>
+      <li><a href="./orders.html">Orders</a></li>
+      <li><a href="./seller_messages.html" class="active">Messages</a></li>
+      <li><a href="./settings.html">Settings</a></li>
+      <li><a href="./seller_report.html">Report</a></li>
+      <a href="./seller_profile.html">Profile</a>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main content -->
+  <div class="main-content">
+    <header>
+      <h1>Messages</h1>
+      <input type="text" placeholder="Search conversation..." id="searchChat" />
+    </header>
+
+    <div class="chat-container">
+      <!-- Chat List -->
+      <div class="chat-list">
+        <div class="chat-item active">
+          <img src="https://via.placeholder.com/40" alt="Client" />
+          <div class="chat-info">
+            <h4>John Doe</h4>
+            <p>Is the brake pad still available?</p>
+          </div>
+        </div>
+        <div class="chat-item">
+          <img src="https://via.placeholder.com/40" alt="Client" />
+          <div class="chat-info">
+            <h4>Sarah Smith</h4>
+            <p>Can I get a discount on sensors?</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Box -->
+      <div class="chat-box">
+        <div class="chat-header">
+          <img src="https://via.placeholder.com/40" alt="Client" />
+          <h3>John Doe</h3>
+        </div>
+
+        <div class="chat-body" id="chatBody">
+          <div class="message client">
+            Hi, I need a new brake pad for Toyota Hilux.
+          </div>
+          <div class="message seller">
+            Sure, we have it in stock. Would you like the original or generic version?
+          </div>
+        </div>
+
+        <div class="chat-input">
+          <input type="file" id="fileInput" hidden />
+          <button id="attachBtn">📎</button>
+          <input type="text" id="messageInput" placeholder="Type a message..." />
+          <button id="sendBtn">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sendBtn = document.getElementById("sendBtn");
+    const messageInput = document.getElementById("messageInput");
+    const chatBody = document.getElementById("chatBody");
+    const attachBtn = document.getElementById("attachBtn");
+    const fileInput = document.getElementById("fileInput");
+
+    sendBtn.addEventListener("click", sendMessage);
+    attachBtn.addEventListener("click", () => fileInput.click());
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files[0];
+      if (file) {
+        const fileMsg = document.createElement("div");
+        fileMsg.classList.add("message", "seller");
+        fileMsg.textContent = `📎 ${file.name}`;
+        chatBody.appendChild(fileMsg);
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+    });
+
+    function sendMessage() {
+      const msg = messageInput.value.trim();
+      if (msg === "") return;
+
+      const messageEl = document.createElement("div");
+      messageEl.classList.add("message", "seller");
+      messageEl.textContent = msg;
+      chatBody.appendChild(messageEl);
+      messageInput.value = "";
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+  </script>
+</body>
+</html>

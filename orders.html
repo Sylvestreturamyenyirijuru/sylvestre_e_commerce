@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Orders | AutoTrack Market</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <h2>Seller Dashboard</h2>
+    <a href="./seller_dashboard.html">Dashboard</a>
+    <a href="./product.html">Products</a>
+    <a href="./orders.html" class="active">Orders</a>
+    <a href="./seller_messages.html">Messages</a>
+    <a href="./settings.html">Settings</a>
+    <li><a href="./seller_report.html">Report</a></li>
+    <a href="./seller_profile.html">Profile</a>
+    <a href="#">Logout</a>
+  </div>
+
+  <!-- Main -->
+  <div class="main-content">
+    <div class="topbar">
+      <span class="menu-btn" id="menu-btn">&#9776;</span>
+      <input type="text" id="searchInput" placeholder="Search orders by buyer or ID...">
+      <div class="profile">👤 Seller</div>
+    </div>
+
+    <div class="orders-header">
+      <h2>Orders</h2>
+      <select class="filter" id="filterStatus">
+        <option value="all">All</option>
+        <option value="pending">Pending</option>
+        <option value="shipped">Shipped</option>
+        <option value="delivered">Delivered</option>
+      </select>
+    </div>
+
+    <table id="ordersTable">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Product</th>
+          <th>Buyer</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-status="pending">
+          <td>#1001</td>
+          <td>Car Battery 12V</td>
+          <td>John Doe</td>
+          <td>2025-10-30</td>
+          <td>$75</td>
+          <td><span class="status pending">Pending</span></td>
+          <td class="actions"><button class="update">🔄</button></td>
+        </tr>
+        <tr data-status="shipped">
+          <td>#1002</td>
+          <td>Bluetooth Speaker</td>
+          <td>Jane Smith</td>
+          <td>2025-10-31</td>
+          <td>$30</td>
+          <td><span class="status shipped">Shipped</span></td>
+          <td class="actions"><button class="update">🔄</button></td>
+        </tr>
+        <tr data-status="delivered">
+          <td>#1003</td>
+          <td>Brake Pads</td>
+          <td>Eric Brown</td>
+          <td>2025-10-28</td>
+          <td>$40</td>
+          <td><span class="status delivered">Delivered</span></td>
+          <td class="actions"><button class="update">🔄</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const sidebar = document.getElementById('sidebar');
+    const searchInput = document.getElementById('searchInput');
+    const filterStatus = document.getElementById('filterStatus');
+    const ordersTable = document.getElementById('ordersTable');
+
+    // Sidebar toggle
+    menuBtn.addEventListener('click', () => sidebar.classList.toggle('active'));
+
+    // Filter orders by status
+    filterStatus.addEventListener('change', () => {
+      const value = filterStatus.value;
+      document.querySelectorAll('#ordersTable tbody tr').forEach(row => {
+        if (value === 'all' || row.dataset.status === value) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+
+    // Search orders
+    searchInput.addEventListener('keyup', () => {
+      const query = searchInput.value.toLowerCase();
+      document.querySelectorAll('#ordersTable tbody tr').forEach(row => {
+        const buyer = row.children[2].innerText.toLowerCase();
+        const id = row.children[0].innerText.toLowerCase();
+        row.style.display = buyer.includes(query) || id.includes(query) ? '' : 'none';
+      });
+    });
+
+    // Update order status cycle
+    ordersTable.addEventListener('click', (e) => {
+      if (e.target.classList.contains('update')) {
+        const row = e.target.closest('tr');
+        const statusCell = row.querySelector('.status');
+        const currentStatus = row.dataset.status;
+
+        let newStatus;
+        if (currentStatus === 'pending') newStatus = 'shipped';
+        else if (currentStatus === 'shipped') newStatus = 'delivered';
+        else newStatus = 'pending'; // cycle back
+
+        row.dataset.status = newStatus;
+        statusCell.className = 'status ' + newStatus;
+        statusCell.textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
+      }
+    });
+  </script>
+
+</body>
+</html>

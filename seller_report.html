@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seller Dashboard - Reports</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <div class="sidebar">
+    <div>
+      <h2>Seller Dashboard</h2>
+      <div class="menu">
+        <a href="./seller_dashboard.html">Dashboard</a>
+        <a href="./product.html">Products</a>
+        <a href="./orders.html">Orders</a>
+        <a href="./seller_messages.html">Messages</a>
+        <a href="./settings.html">Settings</a>
+        <a href="./seller_report.html" class="active">Reports</a>
+        <a href="./seller_profile.html">Profile</a>
+      </div>
+    </div>
+    <div class="logout">
+      <a href="#" style="color:#00aaff;text-decoration:none;">Logout</a>
+    </div>
+  </div>
+
+  <div class="main">
+    <header>
+      <h1>Business Reports</h1>
+      <input type="text" placeholder="Search reports..." />
+    </header>
+
+    <div class="content">
+      <div class="card">
+        <h2>Performance Overview</h2>
+        <div class="stats">
+          <div class="stat-box">
+            <h2>$12,540</h2>
+            <p>Total Revenue</p>
+          </div>
+          <div class="stat-box">
+            <h2>320</h2>
+            <p>Total Orders</p>
+          </div>
+          <div class="stat-box">
+            <h2>1,200</h2>
+            <p>Total Visitors</p>
+          </div>
+        </div>
+        <canvas id="salesChart"></canvas>
+      </div>
+
+      <div class="card">
+        <h2>Top Performing Products</h2>
+        <ul id="topProducts">
+          <li>Engine Filter - 120 sold</li>
+          <li>Car Battery - 95 sold</li>
+          <li>Brake Pads - 80 sold</li>
+          <li>Headlights - 60 sold</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('salesChart');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Monthly Sales ($)',
+          data: [2000, 2500, 3200, 2800, 3500, 4000],
+          borderColor: '#00aaff',
+          backgroundColor: 'rgba(0,170,255,0.1)',
+          fill: true,
+          tension: 0.3,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: true, position: 'bottom' } },
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Dashboard - Profile</title>
+ <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <div class="sidebar">
+    <div>
+      <h2>Seller Dshboard</h2>
+      <div class="menu">
+        <a href="./seller_dashboard.html">Dashboard</a>
+        <a href="./product.html">Products</a>
+        <a href="./orders.html">Orders</a>
+        <a href="./seller_messages.html">Messages</a>
+        <a href="./settings.html">Settings</a>
+        <a href="./seller_report.html">Reports</a>
+        <a href="./seller_profile.html" class="active">Profile</a>
+      </div>
+    </div>
+    <div class="logout">
+      <a href="#" style="color:#00aaff;text-decoration:none;">Logout</a>
+    </div>
+  </div>
+
+  <div class="main">
+    <header>
+      <h1>Seller Profile</h1>
+      <input type="text" placeholder="Search..." />
+    </header>
+
+    <div class="profile-container">
+      <!-- Seller Info Card -->
+      <div class="profile-card">
+        <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-pic" id="profilePreview">
+        <h2 id="sellerName">John Doe</h2>
+        <p><strong>Email:</strong> johndoe@gmail.com</p>
+        <p><strong>Store:</strong> AutoParts Express</p>
+        <p><strong>Phone:</strong> +250 789 123 456</p>
+        <p><strong>Location:</strong> Kigali, Rwanda</p>
+        <button class="edit-btn" onclick="toggleEdit()">Edit Profile</button>
+      </div>
+
+      <!-- Edit Profile Form -->
+      <div class="edit-profile" id="editProfile" style="display:none;">
+        <h2>Edit Your Profile</h2>
+        <form id="profileForm">
+          <label>Full Name</label>
+          <input type="text" id="nameInput" value="John Doe" />
+
+          <label>Email</label>
+          <input type="email" id="emailInput" value="johndoe@gmail.com" />
+
+          <label>Store Name</label>
+          <input type="text" id="storeInput" value="AutoParts Express" />
+
+          <label>Phone</label>
+          <input type="text" id="phoneInput" value="+250 789 123 456" />
+
+          <label>Location</label>
+          <input type="text" id="locationInput" value="Kigali, Rwanda" />
+
+          <label>Change Profile Picture</label>
+          <input type="file" id="profileImage" accept="image/*" />
+
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleEdit() {
+      const editSection = document.getElementById('editProfile');
+      editSection.style.display = editSection.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Handle image preview
+    document.getElementById('profileImage').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profilePreview').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Save Changes
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('sellerName').textContent = document.getElementById('nameInput').value;
+      alert('Profile updated successfully!');
+      toggleEdit();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Dashboard | AutoTrack Market</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <h2>Seller Dashboard</h2>
+    <a href="./seller_dashboard.html" class="active">Dashboard</a>
+    <a href="./product.html">Products</a>
+    <a href="./orders.html">Orders</a>
+    <a href="./seller_messages.html">Messages</a>
+    <a href="./settings.html">Settings</a>
+    <li><a href="./seller_report.html">Report</a></li>
+    <a href="./seller_profile.html">Profile</a>
+    <a href="#">Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="topbar">
+      <span class="menu-btn" id="menu-btn">&#9776;</span>
+      <input type="text" placeholder="Search here...">
+      <div class="profile">👤 Seller</div>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Total Sales</h3>
+        <p>$2,340</p>
+      </div>
+      <div class="card">
+        <h3>Orders</h3>
+        <p>152</p>
+      </div>
+      <div class="card">
+        <h3>Pending</h3>
+        <p>18</p>
+      </div>
+      <div class="card">
+        <h3>Products</h3>
+        <p>67</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sidebar toggle for mobile
+    const menuBtn = document.getElementById('menu-btn');
+    const sidebar = document.getElementById('sidebar');
+
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>
