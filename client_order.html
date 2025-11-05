@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Orders</title>
+  <link rel="stylesheet" href="./client_style.css">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Client Menu</h2>
+    <a href="./client_Dashboard.html">Dashboard</a>
+    <a href="./client_wishlist.html">Wishlist</a>
+    <a href="./client_cart.html">Cart</a>
+    <a href="./client_payment.html">Payment</a>
+    <a href="./client_order.html" class="active">Orders</a>
+    <a href="./client_profile.html">Profile</a>
+    <a href="./cleint_setting.html">Settings</a>
+    <a href="#">Logout</a>
+  </div>
+
+  <div class="main-content">
+    <h1>My Orders</h1>
+
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Order ID</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Amount</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><img src="https://via.placeholder.com/50" alt=""> Denim Jacket</td>
+          <td>#A1023</td>
+          <td>Oct 21, 2025</td>
+          <td><span class="status pending">Pending</span></td>
+          <td>$45.00</td>
+          <td><button class="btn" onclick="viewOrder('#A1023')">View</button></td>
+        </tr>
+        <tr>
+          <td><img src="https://via.placeholder.com/50" alt=""> Sneakers</td>
+          <td>#A1024</td>
+          <td>Oct 25, 2025</td>
+          <td><span class="status shipped">Shipped</span></td>
+          <td>$60.00</td>
+          <td><button class="btn" onclick="viewOrder('#A1024')">Track</button></td>
+        </tr>
+        <tr>
+          <td><img src="https://via.placeholder.com/50" alt=""> T-shirt</td>
+          <td>#A1025</td>
+          <td>Oct 30, 2025</td>
+          <td><span class="status delivered">Delivered</span></td>
+          <td>$25.00</td>
+          <td><button class="btn" onclick="viewOrder('#A1025')">View</button></td>
+        </tr>
+        <tr>
+          <td><img src="https://via.placeholder.com/50" alt=""> Leather Bag</td>
+          <td>#A1026</td>
+          <td>Nov 1, 2025</td>
+          <td><span class="status pending">Pending</span></td>
+          <td>$90.00</td>
+          <td><button class="btn" onclick="viewOrder('#A1026')">Cancel</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function viewOrder(id) {
+      alert("📦 Viewing details for order " + id);
+    }
+  </script>
+</body>
+</html>

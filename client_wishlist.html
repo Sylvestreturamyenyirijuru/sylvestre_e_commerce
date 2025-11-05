@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Wishlist - E-Commerce</title>
+  <link rel="stylesheet" href="./client_style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div>
+      <h1>My E-Commerce</h1>
+      <nav class="nav-links">
+        <a href="./client_Dashboard.html">Dashboard</a>
+        <a href="./client_wishlist.html" class="active">Wishlist</a>
+        <a href="./client_cart.html">Cart</a>
+        <a href="./client_order.html">Orders</a>
+        <a href="./client_profile.html">Profile</a>
+        <a href="./cleint_setting.html">Settings</a>
+        <a href="./cleint_setting.html">LogOut</a>
+      </nav>
+    </div>
+    <footer>
+      <p>© 2025 My E-Commerce</p>
+    </footer>
+  </aside>
+
+  <main>
+    <h2>My Wishlist</h2>
+    <div class="wishlist-container" id="wishlistContainer"></div>
+  </main>
+
+  <script>
+    const wishlistContainer = document.getElementById('wishlistContainer');
+
+    const wishlistItems = [
+      { id: 1, name: 'Modern Sneakers', description: 'Comfortable and trendy sneakers for everyday wear.', image: 'https://via.placeholder.com/300x200?text=Sneakers' },
+      { id: 2, name: 'Smart Watch', description: 'Track your fitness and stay connected on the go.', image: 'https://via.placeholder.com/300x200?text=Smart+Watch' },
+      { id: 3, name: 'Wireless Headphones', description: 'High-quality sound and noise cancellation.', image: 'https://via.placeholder.com/300x200?text=Headphones' },
+      { id: 4, name: 'Classic Sunglasses', description: 'Stylish sunglasses to protect your eyes.', image: 'https://via.placeholder.com/300x200?text=Sunglasses' },
+      { id: 5, name: 'Leather Wallet', description: 'Elegant and durable leather wallet.', image: 'https://via.placeholder.com/300x200?text=Wallet' },
+      { id: 6, name: 'Bluetooth Speaker', description: 'Portable speaker with deep bass.', image: 'https://via.placeholder.com/300x200?text=Speaker' },
+      { id: 7, name: 'Gaming Mouse', description: 'Ergonomic design with RGB lighting.', image: 'https://via.placeholder.com/300x200?text=Mouse' },
+      { id: 8, name: 'Laptop Backpack', description: 'Spacious and water-resistant backpack.', image: 'https://via.placeholder.com/300x200?text=Backpack' }
+    ];
+
+    function renderWishlist() {
+      wishlistContainer.innerHTML = '';
+      wishlistItems.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('wishlist-item');
+        card.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="wishlist-item-content">
+            <h3>${item.name}</h3>
+            <p>${item.description}</p>
+            <button onclick="addToCart(${item.id})">Add to Cart</button>
+            <button class="remove-btn" onclick="removeFromWishlist(${item.id})">Remove</button>
+          </div>
+        `;
+        wishlistContainer.appendChild(card);
+      });
+    }
+
+    function addToCart(id) {
+      alert('Item added to cart: ' + id);
+    }
+
+    function removeFromWishlist(id) {
+      const index = wishlistItems.findIndex(item => item.id === id);
+      if (index !== -1) {
+        wishlistItems.splice(index, 1);
+        renderWishlist();
+      }
+    }
+
+    renderWishlist();
+  </script>
+</body>
+</html>

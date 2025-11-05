@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Page</title>
+  <link rel="stylesheet" href="./client_style.css">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Client Menu</h2>
+    <a href="./client_Dashboard.html">Dashboard</a>
+    <a href="./client_wishlist.html">Wishlist</a>
+    <a href="./client_cart.html">Cart</a>
+    <a href="./client_payment.html" class="active">Payment</a>
+    <a href="./client_order.html">Orders</a>
+    <a href="./client_profile.html">Profile</a>
+    <a href="./cleint_setting.html">Settings</a>
+    <a href="#">Logout</a>
+  </div>
+
+  <div class="main-content">
+    <div class="payment-container">
+      <h1>Complete Your Payment</h1>
+
+      <div class="payment-methods">
+        <input type="radio" id="creditCard" name="payment" value="card" checked>
+        <label for="creditCard">💳 Credit Card</label>
+
+        <input type="radio" id="mobileMoney" name="payment" value="mobile">
+        <label for="mobileMoney">📱 Mobile Money</label>
+      </div>
+
+      <!-- Credit Card Form -->
+      <form id="creditCardForm">
+        <div class="form-group">
+          <label for="name">Cardholder Name</label>
+          <input type="text" id="name" placeholder="Enter cardholder name">
+        </div>
+        <div class="form-group">
+          <label for="cardNumber">Card Number</label>
+          <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+        </div>
+        <div class="form-group">
+          <label for="expiry">Expiry Date</label>
+          <input type="text" id="expiry" placeholder="MM/YY">
+        </div>
+        <div class="form-group">
+          <label for="cvv">CVV</label>
+          <input type="text" id="cvv" placeholder="123">
+        </div>
+        <button class="btn" type="button" onclick="showSuccess()">Pay Now</button>
+      </form>
+
+      <!-- Mobile Money Form -->
+      <form id="mobileMoneyForm" class="hidden">
+        <div class="form-group">
+          <label for="network">Select Network</label>
+          <select id="network">
+            <option value="mtn">MTN Mobile Money</option>
+            <option value="airtel">Airtel Money</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="text" id="phone" placeholder="07xxxxxxxx">
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="text" id="amount" placeholder="Enter amount">
+        </div>
+        <button class="btn" type="button" onclick="showSuccess()">Pay with Mobile Money</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const creditCard = document.getElementById("creditCard");
+    const mobileMoney = document.getElementById("mobileMoney");
+    const creditCardForm = document.getElementById("creditCardForm");
+    const mobileMoneyForm = document.getElementById("mobileMoneyForm");
+
+    creditCard.addEventListener("change", () => {
+      creditCardForm.classList.remove("hidden");
+      mobileMoneyForm.classList.add("hidden");
+    });
+
+    mobileMoney.addEventListener("change", () => {
+      mobileMoneyForm.classList.remove("hidden");
+      creditCardForm.classList.add("hidden");
+    });
+
+    function showSuccess() {
+      alert("✅ Payment Successful! Thank you for your purchase.");
+    }
+  </script>
+</body>
+</html>
